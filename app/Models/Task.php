@@ -10,12 +10,12 @@ class Task extends Model
     	'name', 'description', 'start_time', 'end_time', 'status_id', 'member_id', 'project_id'
     ];
 
-    public function members()
+    public function member()
     {
     	return $this->belongsTo(Member::class);
     }
 
-    public function projects()
+    public function project()
     {
     	return $this->belongsTo(Project::class);
     }
