@@ -28,6 +28,6 @@ class CreateMemberProjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('member_projects');
+        Schema::dropIfExists('member_project');
     }
 }
