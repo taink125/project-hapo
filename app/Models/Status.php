@@ -10,7 +10,7 @@ class Status extends Model
     	'name', 'type'
     ];
 
-    public function project()
+    public function projects()
     {
     	return $this->hasMany(Project::class);
     }
