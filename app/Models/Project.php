@@ -15,17 +15,12 @@ class Project extends Model
     	return $this->belongsToMany(Member::class, 'member_project');
     }
 
-    public function member_project()
-    {
-    	return $this->belongsTo(MemberProject::class)
-    }
-
     public function customers()
     {
     	return $this->belongsTo(Customer::class);
     }
 
-    public function statuses()
+    public function status()
     {
     	return $this->hasOne(Status::class);
     }
