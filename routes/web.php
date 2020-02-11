@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('/admin/users', 'Admin\LoginController', ['except' => ['show', 'create', 'store']]);
+Route::get('/home', 'HomeController@index')->name('home');
