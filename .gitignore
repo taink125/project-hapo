@@ -6,6 +6,12 @@
 /vendor
 .env
 .env.backup
+/public/pages/
+/public/dist/
+/public/plugins/
+/public/css/
+/public/mix-manifest.json
+/public/js/
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
