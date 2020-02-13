@@ -6,6 +6,10 @@
 /vendor
 .env
 .env.backup
+/public/dist/
+/public/pages/
+/public/plugins/
+/node_modules/
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
