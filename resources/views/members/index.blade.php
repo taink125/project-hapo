@@ -39,6 +39,9 @@
     </tr>
     @endforeach
 </table>
-{{ $members->links() }}
+<div>
+   {{ $members->links() }} 
+</div>
+
 </div>
 @endsection
