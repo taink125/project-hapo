@@ -15,8 +15,19 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::all();
-        return view('members.index')->with('members', $members);
+        $members = Member::paginate(10);
+        return view('members.index', ['members' => $members]);
+    }
+
+    public function search(Request $request) 
+    {
+        $search = $request->get('keySearch');
+        $members = Member::where('name', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhere('phone', 'like', '%'.$search.'%')
+                    ->orWhere('id', 'like', '%'.$search.'%')->paginate();
+
+        return view('members.index', ['members' => $members]);
     }
 
     /**

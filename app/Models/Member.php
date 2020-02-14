@@ -8,6 +8,11 @@ use Illuminate\Notifications\Notifiable;
 
 class Member extends Authenticatable
 {
+    const IS_ADMIN = [
+        0 => 'Admin',
+        1 => 'User'
+    ];
+
     protected $fillable = [
     	'name', 'email', 'phone', 'image', 'password', 'address', 'is_admin'
     ];
@@ -20,5 +25,15 @@ class Member extends Authenticatable
     public function tasks()
     {
     	return $this->hasMany(Task::class);
+    }
+
+    public function leadingProjects()
+    {
+        return $this->hasMany(Project::class, 'foreign_key', 'leader_id');
+    }
+
+    public function getIsAdminLabelAttribute()
+    {
+        return self::IS_ADMIN[$this->is_admin];
     }
 }

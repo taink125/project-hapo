@@ -14,18 +14,20 @@
         <th class="text-center">Email</th>
         <th class="text-center">Phone</th>
         <th class="text-center">Address</th>
+        <th class="text-center">Role</th>
         <th class="text-center">Action</th>
     </tr>
     @foreach($members as $member) 
     <tr>
         <td class="text-center">{{ $member->id }}</td>
         <td>{{ $member->name }}</td>
-        <td class="text-center">{{ $member->image }}</td>
+        <td class="text-center"><img class="w-25" src="/dist/img/{{ $member->image }}" alt="avatar"></td>
         <td>{{ $member->email }}</td>
         <td class="text-center">{{ $member->phone }}</td>
         <td class="text-center">{{ $member->address }}</td>
+        <td class="text-center">{{ $member->is_admin_label }}</td>
         <td class="text-center d-flex justify-content-center">
-            <a type="button" class="mr-2 btn btn-outline-warning p-1" href="{{ route('member.edit', $member->id) }}">
+            <a type="button" class="mr-2 btn btn-outline-info p-1" href="{{ route('member.edit', $member->id) }}">
                 <span class="fa fa-edit mr-2"></span>Edit
             </a> 
             <form action="{{ route('member.destroy', $member->id) }}" method="POST" accept-charset="utf-">
@@ -37,5 +39,6 @@
     </tr>
     @endforeach
 </table>
+{{ $members->links() }}
 </div>
 @endsection

@@ -20,10 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('member')->name('member.')->group(function() {
-    Route::get('/', 'MemberController@index')->name('index');
-    Route::get('create', 'MemberController@create')->name('create');
-    Route::post('/', 'MemberController@store')->name('store');
-    Route::get('{id}/edit', 'MemberController@edit')->name('edit');
-    Route::put('{id}', 'MemberController@update')->name('update');
-    Route::delete('{id}', 'MemberController@destroy')->name('destroy');
+    Route::get('search', 'MemberController@search')->name('search');
 });
+
+Route::resource('member', 'MemberController', [
+	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
+]);
