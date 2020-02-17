@@ -24,7 +24,7 @@ class MemberController extends Controller
                 ->orWhere('phone', 'like', '%' . $request->keySearch . '%')
                 ->orWhere('id', 'like', '%' . $request->keySearch . '%');      
             }
-        })->paginate(config('app.pagination'))  ;
+        })->paginate(config('app.pagination'));
         return view('members.index', ['members' => $members]);
 
         $members = Member::paginate(config('app.pagination'));
