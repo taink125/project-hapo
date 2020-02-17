@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberPost;
-use File;
+use Move;
 
 class MemberController extends Controller
 {
@@ -50,8 +50,8 @@ class MemberController extends Controller
     public function store(StoreMemberPost $request)
     {
         $member = new Member();
-        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
-        $path = request()->image->storeAs('/public/storage/uploads', $imageName);
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalName();
+        $path = request()->image->storeAs('/public/uploads', $imageName);
         $member = Member::create($request->all());
 
         return redirect()->route('member.index');
