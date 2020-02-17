@@ -16,18 +16,7 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
-        $members = Member::Where(function($query) use ($request) 
-        {
-            if (!empty($request->keySearch)) {
-                $query->where('name', 'like', '%' . $request->keySearch . '%')  
-                ->orWhere('email', 'like', '%' . $request->keySearch . '%')
-                ->orWhere('phone', 'like', '%' . $request->keySearch . '%')
-                ->orWhere('id', 'like', '%' . $request->keySearch . '%');      
-            }
-        })->paginate(config('app.pagination'));
-        return view('members.index', ['members' => $members]);
-
-        $members = Member::paginate(config('app.pagination'));
+        $members = Member::member($request)->paginate(config('app.pagination'));
         return view('members.index', ['members' => $members]);
     }
 

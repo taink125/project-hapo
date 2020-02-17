@@ -13,6 +13,14 @@ class Member extends Authenticatable
         1 => 'User'
     ];
 
+    public function scopeMember($query, $request)
+    {
+        return $query->where('name', 'like', '%' . $request->keySearch . '%')  
+                ->orWhere('email', 'like', '%' . $request->keySearch . '%')
+                ->orWhere('phone', 'like', '%' . $request->keySearch . '%')
+                ->orWhere('id', 'like', '%' . $request->keySearch . '%');
+    }
+
     protected $fillable = [
     	'name', 'email', 'phone', 'image', 'password', 'address', 'is_admin'
     ];
