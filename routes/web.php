@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('member')->name('member.')->group(function() {
-    Route::get('search', 'MemberController@search')->name('search');
+    Route::get('search', 'MemberController@index')->name('search');
 });
 
 Route::resource('member', 'MemberController', [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberPost;
+use File;
 
 class MemberController extends Controller
 {
@@ -13,20 +14,20 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::paginate(10);
+        $members = Member::Where(function($query) use ($request) 
+        {
+            if (!empty($request->keySearch)) {
+                $query->where('name', 'like', '%' . $request->keySearch . '%')  
+                ->orWhere('email', 'like', '%' . $request->keySearch . '%')
+                ->orWhere('phone', 'like', '%' . $request->keySearch . '%')
+                ->orWhere('id', 'like', '%' . $request->keySearch . '%');      
+            }
+        })->paginate(config('app.pagination'))  ;
         return view('members.index', ['members' => $members]);
-    }
 
-    public function search(Request $request) 
-    {
-        $search = $request->get('keySearch');
-        $members = Member::where('name', 'like', '%'.$search.'%')
-                    ->orWhere('email', 'like', '%'.$search.'%')
-                    ->orWhere('phone', 'like', '%'.$search.'%')
-                    ->orWhere('id', 'like', '%'.$search.'%')->paginate();
-
+        $members = Member::paginate(config('app.pagination'));
         return view('members.index', ['members' => $members]);
     }
 
@@ -49,6 +50,8 @@ class MemberController extends Controller
     public function store(StoreMemberPost $request)
     {
         $member = new Member();
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        $path = request()->image->storeAs('/public/storage/uploads', $imageName);
         $member = Member::create($request->all());
 
         return redirect()->route('member.index');
@@ -90,6 +93,6 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $member->delete();
-        return redirect()->route('member.index');
+        return redirect()->route('member.index')->with('success', __('messages.destroy'));
     }
 }

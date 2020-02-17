@@ -7,6 +7,7 @@
     <a href="{{ route('member.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</a>
 </div>
 <table class="table table-bordered table-sm table-striped table-hover">
+    @if (isset($members))
     <tr class="thead-dark">
         <th class="text-center">ID</th>
         <th class="text-center">Name</th>
@@ -21,7 +22,7 @@
     <tr>
         <td class="text-center">{{ $member->id }}</td>
         <td>{{ $member->name }}</td>
-        <td class="text-center"><img class="w-25" src="/dist/img/{{ $member->image }}" alt="avatar"></td>
+        <td class="text-center"><img class="w-25" src="{{ $member->image }}" alt="avatar"></td>
         <td>{{ $member->email }}</td>
         <td class="text-center">{{ $member->phone }}</td>
         <td class="text-center">{{ $member->address }}</td>
@@ -39,8 +40,12 @@
     </tr>
     @endforeach
 </table>
-<div>
+<div class="d-flex justify-content-end">
    {{ $members->links() }} 
+   {{ $members->appends($_GET)->links() }}
+   @else
+       {{ $message }}
+   @endif
 </div>
 
 </div>
