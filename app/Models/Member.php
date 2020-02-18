@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\Request;
 
 class Member extends Authenticatable
 {
@@ -13,12 +14,31 @@ class Member extends Authenticatable
         1 => 'User'
     ];
 
-    public function scopeMember($query, $request)
+    public function scopeSearch($query, $request)
     {
-        return $query->where('name', 'like', '%' . $request->keySearch . '%')  
-                ->orWhere('email', 'like', '%' . $request->keySearch . '%')
-                ->orWhere('phone', 'like', '%' . $request->keySearch . '%')
-                ->orWhere('id', 'like', '%' . $request->keySearch . '%');
+        return $query->searchName($request)
+            ->searchEmail($request)
+            ->searchPhone($request);
+    }
+
+    public function scopeSearchName($query, $request)
+    {
+        return $query->where('name', 'like', '%' . $request->keySearch . '%');
+    }
+
+    public function scopeSearchEmail($query, $request)
+    {
+        return $query->orWhere('email', 'like', '%' . $request->keySearch . '%');
+    }
+
+    public function scopeSearchPhone($query, $request)
+    {
+        return $query->orWhere('phone', 'like', '%' . $request->keySearch . '%');
+    }
+
+    public function scopeSearchRole($query, $request)
+    {
+        return $query->where('is_admin', 'like', '%' . $request->searchPermission . '%');
     }
 
     protected $fillable = [

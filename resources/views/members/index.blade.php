@@ -19,7 +19,7 @@
     @foreach($members as $member) 
     <tr>
         <td>{{ $member->name }}</td>
-        <td class="text-center"><img class="w-25" src="{{ asset("storage/uploads/$member->image") }}" alt="avatar"></td>
+        <td class="text-center"><img class="w-25" src="{{ $member->image }}" alt="avatar"></td>
         <td>{{ $member->email }}</td>
         <td class="text-center">{{ $member->phone }}</td>
         <td class="text-center">{{ $member->address }}</td>

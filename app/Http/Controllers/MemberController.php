@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberPost;
-use Move;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
@@ -16,7 +16,9 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
-        $members = Member::member($request)->paginate(config('app.pagination'));
+        $members = Member::search($request)
+            ->searchRole($request)
+            ->paginate(config('app.pagination'));
         return view('members.index', ['members' => $members]);
     }
 
@@ -38,12 +40,22 @@ class MemberController extends Controller
      */
     public function store(StoreMemberPost $request)
     {
-        $member = new Member();
-        $imageName = uniqid() . '.' . request()->image->getClientOriginalName();
-        $path = request()->image->storeAs('/public/uploads', $imageName);
-        $member = Member::create($request->all());
+        $data = $request->all();
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $imageName = 'storage/images/' . $imageName;
+        $member = [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone ' => $data['phone'],
+            'image' => $imageName,
+            'address' => $data['address'],
+            'password' => Hash::make($data['password']),
+            'is_admin' => $data['is_admin']
+        ];
 
-        return redirect()->route('member.index');
+        $member = Member::create($member);
+        return redirect()->route('member.index')->with('success', __('messages.create'));
     }
 
     /**
@@ -66,10 +78,21 @@ class MemberController extends Controller
      */
     public function update(StoreMemberPost $request, $id)
     {
-        $member = Member::findOrFail($id);
-        $member->update($request->all());
-
-        return redirect()->route('member.index');
+        $data = $request->all();
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $imageName = 'storage/images/' . $imageName;
+        $member = [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone ' => $data['phone'],
+            'image' => $imageName,
+            'address' => $data['address'],
+            'password' => Hash::make($data['password']),
+            'is_admin' => $data['is_admin']
+        ];
+        $member = Member::findOrFail($id)->update($member);
+        return redirect()->route('member.index')->with('success', __('messages.update'));
     }
 
     /**
