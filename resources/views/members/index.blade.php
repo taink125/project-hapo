@@ -5,6 +5,12 @@
 <div class="container-fluid">
 <div class="w-50">
     <a href="{{ route('member.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</a>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;
+            </a> {{ session('success') }}
+        </div>
+    @endif
 </div>
 <table class="table table-bordered table-sm table-striped table-hover">
     <tr class="thead-dark">
