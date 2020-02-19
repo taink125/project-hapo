@@ -18,7 +18,8 @@ class Member extends Authenticatable
     {
         return $query->searchName($request)
             ->searchEmail($request)
-            ->searchPhone($request);
+            ->searchPhone($request)
+            ->searchRole($request);
     }
 
     public function scopeSearchName($query, $request)

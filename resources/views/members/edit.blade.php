@@ -11,10 +11,10 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" src="{{ $members->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $members->name }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -28,7 +28,9 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $members->image }}" required autocomplete="image">
+                                <input id="email" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="" autocomplete="image">
+                                <img class="w-25" src="{{ asset("storage/images/$members->image") }}" alt="image" />
+                                <input type="hidden" name="hidden_image" value="{{ $members->image }}">
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">

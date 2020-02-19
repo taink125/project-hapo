@@ -30,11 +30,12 @@
             <form class="form-inline ml-3" method="get" action="{{ route('member.search') }}">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" name="keySearch" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <select name="searchPermission" placeholder="Role">
-                        <option>Role</option>
+                        aria-label="Search">&nbsp;
+                    <select name="searchPermission">
+                        <option></option>}
+                        option
                         @foreach(App\Models\Member::IS_ADMIN as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            <option placeholder="Role" value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
                     <div class="input-group-append">
