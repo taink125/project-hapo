@@ -28,7 +28,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="" autocomplete="image">
+                                <input id="email" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required value="" autocomplete="image">
                                 <img class="w-25" src="{{ asset("storage/images/$members->image") }}" alt="image" />
                                 <input type="hidden" name="hidden_image" value="{{ $members->image }}">
 
@@ -87,6 +87,7 @@
 
                             <div class="col-md-6">
                                 <select name="is_admin" class="form-control @error('role') is-invalid @enderror" value="{{ old('role') }}" required autocomplete="role">
+                                    <option value="">{{ $members->is_admin_label }}</option>
                                     @foreach (App\Models\Member::IS_ADMIN as $key => $label)
                                         <option value="{{ $key }}">{{ $label }}</option>
                                     @endforeach
@@ -98,12 +99,12 @@
                                 @enderror
                             </div>
                         </div>
-
+                        
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" value="{{ $members->password }}" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" value="" name="password" autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -114,10 +115,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="passworConfirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" value="{{ $members->password }}" name="password_confirmation" required autocomplete="new-password">
+                                <input id="passwordConfirm" type="password" class="form-control" value="" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
@@ -126,6 +127,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
+                                <a href="{{ route('member.index') }}" class="btn btn-danger">
+                                    {{ __('Cancel') }}
+                                </a>
                             </div>
                         </div>
                     </form>

@@ -18,8 +18,7 @@ class Member extends Authenticatable
     {
         return $query->searchName($request)
             ->searchEmail($request)
-            ->searchPhone($request)
-            ->searchRole($request);
+            ->searchPhone($request);
     }
 
     public function scopeSearchName($query, $request)
@@ -39,7 +38,9 @@ class Member extends Authenticatable
 
     public function scopeSearchRole($query, $request)
     {
-        return $query->where('is_admin', 'like', '%' . $request->searchPermission . '%');
+        if (!empty($request->searchPermission)) {
+            return $query->where('is_admin', $request->searchPermission);
+        }
     }
 
     protected $fillable = [

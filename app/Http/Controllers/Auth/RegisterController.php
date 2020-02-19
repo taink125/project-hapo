@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string', 'max:255'],
-            'image' => ['required', 'string', 'max:255'],
+            'image' => ['required', 'image', 'max:2048'],
             'is_admin' => ['required', 'integer'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
@@ -68,14 +68,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Member::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'image' => $data['image'],
-            'is_admin' => $data['is_admin'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $data['image'] = $imageName;
+        $data['password'] = Hash::make($data['password']);
+        $user = Member::create($data);
+
+        return $users;
     }
 }

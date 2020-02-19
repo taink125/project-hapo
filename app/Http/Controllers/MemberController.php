@@ -75,13 +75,13 @@ class MemberController extends Controller
     public function update(UpdateMember $request, $id)
     {
         $data = $request->all();
+
         $imageName = $request->hidden_image;
         $image = $request->file('image');
         if ($image != '') {
             $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
             request()->image->storeAs('public/images', $imageName);
             $data['image'] = $imageName;
-            $data['password'] = Hash::make($data['password']);
         }
 
         Member::findOrFail($id)->update($data);

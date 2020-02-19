@@ -38,7 +38,7 @@
     @endforeach
 </table>
 <div class="d-flex justify-content-end">
-    {{ $members->links() }} 
+    {{ $members->appends($_GET)->links() }}
 </div>
 
 </div>
