@@ -8,7 +8,7 @@
 .env.backup
 /config/*
 /public/*
-/.idea/*
+.idea/*
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
