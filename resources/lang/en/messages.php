@@ -1,7 +1,8 @@
 <?php
-	return [
-		'create' => 'Created successfully',
-		'update' => 'Update successfully',
-		'destroy' =>'Delete successfully',
-	];
+
+return [
+	'create' => 'Created successfully',
+	'update' => 'Update successfully',
+	'destroy' =>'Delete successfully',
+];
  
