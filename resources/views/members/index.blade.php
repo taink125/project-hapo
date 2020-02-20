@@ -8,7 +8,6 @@
     <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" value="{{ request()->input('keySearch') }}" name="keySearch" type="search" placeholder="Search"
             aria-label="Search">&nbsp;
-            {{-- @dd(request()) --}}
         <select name="searchPermission">
             <option></option>
             @foreach(App\Models\Member::IS_ADMIN as $key => $value)
