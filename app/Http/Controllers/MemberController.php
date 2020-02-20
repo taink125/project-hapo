@@ -5,18 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberPost;
+use App\Http\Requests\UpdateMember;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::all();
-        return view('members.index')->with('members', $members);
+        $members = Member::search($request)
+            ->searchRole($request)
+            ->paginate(config('app.pagination'));
+        return view('members.index', ['members' => $members]);
     }
 
     /**
@@ -37,10 +46,14 @@ class MemberController extends Controller
      */
     public function store(StoreMemberPost $request)
     {
-        $member = new Member();
-        $member = Member::create($request->all());
+        $data = $request->all();
+        $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->storeAs('public/images', $imageName);
+        $data['image'] = $imageName;
+        $data['password'] = Hash::make($data['password']);
 
-        return redirect()->route('member.index');
+        Member::create($data);
+        return redirect()->route('member.index')->with('success', __('messages.create'));
     }
 
     /**
@@ -57,16 +70,28 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @p{aram  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreMemberPost $request, $id)
+    public function update(UpdateMember $request, $id)
     {
-        $member = Member::findOrFail($id);
-        $member->update($request->all());
+        $data = $request->all();    
+        $image = $request->file('image');
+        if ($image != '') {
+            $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
+            request()->image->storeAs('public/images', $imageName);
+            $data['image'] = $imageName;
+        }
 
-        return redirect()->route('member.index');
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        Member::findOrFail($id)->update($data);
+        return redirect()->route('member.index')->with('success', __('messages.update'));
     }
 
     /**
@@ -79,6 +104,6 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $member->delete();
-        return redirect()->route('member.index');
+        return redirect()->route('member.index')->with('success', __('messages.destroy'));
     }
 }

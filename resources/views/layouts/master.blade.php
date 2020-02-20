@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Home | @yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css')}}">
-    <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -27,18 +26,6 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-success" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
@@ -59,8 +46,8 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
@@ -184,11 +171,8 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+    <script type="{{ mix('/js/app.js')}}"></script>
 </body>
 </html>

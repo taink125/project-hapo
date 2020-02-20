@@ -7,9 +7,8 @@
                 <div class="card-header">Register Member</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('member.store') }}">
+                    <form method="POST" action="{{ route('member.store') }}" enctype='multipart/form-data'>
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
@@ -85,9 +84,9 @@
 
                             <div class="col-md-6">
                                 <select name="is_admin" class="form-control @error('role') is-invalid @enderror" value="{{ old('role') }}" required autocomplete="role">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                    @foreach (App\Models\Member::IS_ADMIN as $key => $label)
+                                        <option value="{{ $key }}">{{ $label }}</option>
+                                    @endforeach
                                 </select>
                                 @error('role')
                                     <span class="invalid-feedback" role="alert">
