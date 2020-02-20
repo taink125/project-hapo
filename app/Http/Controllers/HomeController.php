@@ -9,7 +9,7 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return vpopmail_del_domain(domain)
      */
     public function __construct()
     {
