@@ -3,6 +3,24 @@
 @section('management', 'List Members')
 @section('content')
 <div class="container-fluid">
+<!-- SEARCH FORM -->
+<form class="form-inline mb-3" method="get" action="{{ route('member.search') }}">
+    <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" value="{{ request()->input('keySearch') }}" name="keySearch" type="search" placeholder="Search"
+            aria-label="Search">&nbsp;
+        <select name="searchPermission">
+            <option value=""></option>
+            @foreach(App\Models\Member::IS_ADMIN as $key => $value)
+                <option placeholder="Role" value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
+        <div class="input-group-append">
+            <button class="btn btn-navbar bg-success" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
 <div class="w-50">
     <a href="{{ route('member.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</a>
     @if (session('success'))

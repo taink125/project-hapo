@@ -23,13 +23,12 @@ class UpdateMember extends FormRequest
      */
     public function rules()
     {
-
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'image' => ['required', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:2048'],
             'is_admin' => ['required', 'integer'],
             'password' => ['nullable', 'min:8', 'confirmed']
         ];

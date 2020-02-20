@@ -26,24 +26,6 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3" method="get" action="{{ route('member.search') }}">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" name="keySearch" type="search" placeholder="Search"
-                        aria-label="Search">&nbsp;
-                    <select name="searchPermission">
-                        <option></option>}
-                        @foreach(App\Models\Member::IS_ADMIN as $key => $value)
-                            <option placeholder="Role" value="{{ $key }}">{{ $value }}</option>
-                        @endforeach
-                    </select>
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar bg-success" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->

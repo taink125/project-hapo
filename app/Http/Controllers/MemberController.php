@@ -84,6 +84,12 @@ class MemberController extends Controller
             $data['image'] = $imageName;
         }
 
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
         Member::findOrFail($id)->update($data);
         return redirect()->route('member.index')->with('success', __('messages.update'));
     }
