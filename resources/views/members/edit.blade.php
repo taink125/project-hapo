@@ -14,8 +14,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $members->name }}" required autocomplete="name" autofocus>
-
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ (old('name')) ? old('name') : $members->name }}" required autocomplete="name">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +27,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required value="" autocomplete="image">
+                                <input id="email" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image" required value="" autocomplete="image">
                                 <img class="w-25" src="{{ asset("storage/images/$members->image") }}" alt="image" />
                                 <input type="hidden" name="hidden_image" value="{{ $members->image }}">
 
@@ -44,7 +43,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $members->email }}" required autocomplete="email">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ (old('email')) ? old('email') : $members->email }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +57,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $members->phone }}" required autocomplete="phone">
+                                <input id="email" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ (old('phone')) ? old('phone') : $members->phone }}" required autocomplete="phone">
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +71,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $members->address }}" required autocomplete="address">
+                                <input id="email" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ (old('address')) ? old('address') : $members->address }}" required autocomplete="address">
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -86,20 +85,19 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select name="is_admin" class="form-control @error('role') is-invalid @enderror" value="{{ old('role') }}" required autocomplete="role">
-                                    <option value="">{{ $members->is_admin_label }}</option>
+                                <select name="is_admin" class="form-control @error('is_admin') is-invalid @enderror" value="" required autocomplete="is_admin">
                                     @foreach (App\Models\Member::IS_ADMIN as $key => $label)
-                                        <option value="{{ $key }}">{{ $label }}</option>
+                                        <option value="{{ $key }}" @if(old('is_admin') === $key) selected @elseif($members->is_admin === $key) selected @endif>{{ $label }}</option>
                                     @endforeach
                                 </select>
-                                @error('role')
+                                @error('is_admin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

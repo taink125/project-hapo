@@ -14,7 +14,7 @@ class MemberController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +23,7 @@ class MemberController extends Controller
     public function index(Request $request)
     {
         $members = Member::search($request)
+            ->searchRole($request)
             ->paginate(config('app.pagination'));
         return view('members.index', ['members' => $members]);
     }
@@ -50,6 +51,7 @@ class MemberController extends Controller
         request()->image->storeAs('public/images', $imageName);
         $data['image'] = $imageName;
         $data['password'] = Hash::make($data['password']);
+
         Member::create($data);
         return redirect()->route('member.index')->with('success', __('messages.create'));
     }
@@ -74,10 +76,10 @@ class MemberController extends Controller
      */
     public function update(UpdateMember $request, $id)
     {
-        $data = $request->all();
+        $data = $request->all();    
 
-        $imageName = $request->hidden_image;
         $image = $request->file('image');
+        $password = $request->file('password');
         if ($image != '') {
             $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
             request()->image->storeAs('public/images', $imageName);

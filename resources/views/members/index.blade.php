@@ -22,7 +22,7 @@
         <th class="text-center">Role</th>
         <th class="text-center">Action</th>
     </tr>
-    @foreach($members as $member) 
+    @foreach($members as $member)
     <tr>
         <td>{{ $member->name }}</td>
         <td class="text-center"><img style="width: 100px; height: 128px; object-fit: contain;" src="{{ asset("storage/images/$member->image") }}" alt="avatar"></td>
@@ -33,7 +33,7 @@
         <td class="text-center d-flex justify-content-center">
             <a type="button" class="mr-2 btn btn-outline-info p-1" href="{{ route('member.edit', $member->id) }}">
                 <span class="fa fa-edit mr-2"></span>Edit
-            </a> 
+            </a>
             <form action="{{ route('member.destroy', $member->id) }}" method="POST" accept-charset="utf-">
                 @method('DELETE')
                 @csrf
