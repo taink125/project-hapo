@@ -77,9 +77,7 @@ class MemberController extends Controller
     public function update(UpdateMember $request, $id)
     {
         $data = $request->all();    
-
         $image = $request->file('image');
-        $password = $request->file('password');
         if ($image != '') {
             $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
             request()->image->storeAs('public/images', $imageName);
