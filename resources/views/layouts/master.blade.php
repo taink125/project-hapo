@@ -100,13 +100,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('member.index') }}" class="nav-link active">
+                                    <a href="{{ route('member.index') }}" class="nav-link">
                                         <i class="fa fa-circle nav-icon"></i>
                                         <p>Members</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('customer.index') }}" class="nav-link">
                                         <i class="fa fa-circle nav-icon"></i>
                                         <p>Customers</p>
                                     </a>
