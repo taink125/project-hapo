@@ -28,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers.register');
+        return view('customers.create');
     }
 
     /**
@@ -66,9 +66,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCustomer $request, $id)
     {
-        $data = $request->all();    
+        $data = $request->all();
         $image = $request->file('image');
         if ($image != '') {
             $imageName = uniqid() . '.' . request()->image->getClientOriginalExtension();
