@@ -100,39 +100,30 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('member.index') }}" class="nav-link active">
-                                        <i class="fa fa-circle nav-icon"></i>
+                                    <a href="{{ route('member.index') }}" class="nav-link">
+                                        <i class="fa fa-user nav-icon"></i>
                                         <p>Members</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
+                                    <a href="{{ route('customer.index') }}" class="nav-link">
+                                        <i class="fa fa-users nav-icon"></i>
                                         <p>Customers</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
+                                        <i class="fa fa-project-diagram nav-icon"></i>
                                         <p>Projects</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
+                                        <i class="fa fa-tasks nav-icon"></i>
                                         <p>Tasks</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-th"></i>
-                                <p>
-                                    Simple Link
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>
