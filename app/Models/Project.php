@@ -17,7 +17,7 @@ class Project extends Model
 
     public function customer()
     {
-    	return $this->belongsTo(Customer::class);
+    	return $this->hasOne(Customer::class);
     }
 
     public function status()

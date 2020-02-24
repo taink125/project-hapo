@@ -36,7 +36,7 @@
     @foreach($customers as $customer)
     <tr>
         <td>{{ $customer->name }}</td>
-        <td class="text-center"><img style="width: 100px; height: 128px; object-fit: contain;" src="{{ asset("storage/images/$customer->image") }}" alt="avatar"></td>
+        <td class="text-center"><img style="width: 50px; height: 50px; object-fit: contain;" src="{{ asset("storage/images/$customer->image") }}" alt="avatar"></td>
         <td>{{ $customer->email }}</td>
         <td class="text-center">{{ $customer->phone }}</td>
         <td class="text-center">{{ $customer->address }}</td>

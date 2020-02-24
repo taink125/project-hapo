@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
 </head>
-
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
@@ -98,7 +97,7 @@
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview ml-2">
                                 <li class="nav-item">
                                     <a href="{{ route('member.index') }}" class="nav-link">
                                         <i class="fa fa-user nav-icon"></i>
@@ -112,7 +111,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="fa fa-project-diagram nav-icon"></i>
                                         <p>Projects</p>
                                     </a>
@@ -121,6 +120,12 @@
                                     <a href="#" class="nav-link">
                                         <i class="fa fa-tasks nav-icon"></i>
                                         <p>Tasks</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('status.index') }}" class="nav-link">
+                                        <i class="fa fa-cube nav-icon"></i>
+                                        <p>Statuses</p>
                                     </a>
                                 </li>
                             </ul>
@@ -165,5 +170,6 @@
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
     <script type="{{ mix('/js/app.js')}}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
