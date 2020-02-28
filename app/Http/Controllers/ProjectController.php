@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Member;
+use App\Models\Customer;
+use App\Models\Status;
+use App\Http\Requests\StoreProjectPost;
 
 class ProjectController extends Controller
 {
@@ -12,9 +16,13 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $projects = Project::search($request)
+            ->paginate(config('app.pagination'));
+        $members = Project::with('member_project')->get();
 
+        return view('projects.index', ['projects' => $projects]);
     }
 
     /**
@@ -24,7 +32,13 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'customers' => Customer::all(),
+            'statuses' => Status::all(),
+            'members' => Member::all()
+        ];
+
+        return view('projects.create', $data);
     }
 
     /**
@@ -33,20 +47,16 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectPost $request)
     {
-        //
-    }
+        $data = $request->all();
+        $project = Project::create($data);
+        $members = $request->member_id;
+        foreach ((array) $members as $member) {
+            $project->members()->attach($member);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('project.index')->with('success', __('messages.create'));
     }
 
     /**
@@ -57,7 +67,12 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'customers' => Customer::all(),
+            'statuses' => Status::all(),
+            'members' => Member::all()
+        ];
+        return view('projects.edit', $data)->with('projects', Project::findOrFail($id));
     }
 
     /**
@@ -67,9 +82,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProjectPost $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->update($request->all());
+        $members[] = $request->member_id;
+        if ($members != '') {
+            foreach ((array) $members as $member) {
+                $project->members()->sync($member);
+            }
+        }
+        
+
+        return redirect()->route('project.index')->with('success', __('messages.update'));
     }
 
     /**
@@ -80,6 +105,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+        return redirect()->route('project.index')->with('success', __('messages.destroy'));
     }
 }

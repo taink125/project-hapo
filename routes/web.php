@@ -55,3 +55,12 @@ Route::prefix('status')->name('status.')->group(function() {
 Route::resource('status', 'StatusController', [
 	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
 ]);
+
+//Route tasks
+Route::prefix('tasks')->name('tasks.')->group(function() {
+	Route::get('search', 'TaskController@index')->name('search');
+});
+
+Route::resource('tasks', 'TaskController', [
+	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
+]);

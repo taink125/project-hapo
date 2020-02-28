@@ -49,7 +49,8 @@ class Member extends Authenticatable
 
     public function projects()
     {
-    	return $this->belongsToMany(Project::class, 'member_project');
+    	return $this->belongsToMany(Project::class, 'member_project')
+            ->withTimestamps();
     }
 
     public function tasks()
@@ -59,7 +60,7 @@ class Member extends Authenticatable
 
     public function leadingProjects()
     {
-        return $this->hasMany(Project::class, 'foreign_key', 'leader_id');
+        return $this->hasMany(Project::class, 'leader_id');
     }
 
     public function getIsAdminLabelAttribute()

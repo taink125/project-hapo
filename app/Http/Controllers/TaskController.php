@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Status;
-use App\Http\Requests\StoreStatusPost;
 
-class StatusController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class StatusController extends Controller
      */
     public function index(Request $request)
     {
-        $statuses = Status::search($request)
+        $tasks = Task::search($request)
             ->paginate(config('app.pagination'));
-        return view('statuses.index', ['statuses' => $statuses]);
+        return view('statuses.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -27,7 +26,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        return view('statuses.create');
+        //
     }
 
     /**
@@ -36,11 +35,20 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStatusPost $request)
+    public function store(Request $request)
     {
-        $status = Status::create($request->all());
+        //
+    }
 
-        return redirect()->route('status.index')->with('success', __('messages.create'));
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -51,7 +59,7 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        return view('statuses.edit')->with('status', Status::findOrFail($id));
+        //
     }
 
     /**
@@ -61,12 +69,9 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreStatusPost $request, $id)
+    public function update(Request $request, $id)
     {
-        $status = Status::findOrFail($id);
-        $status->update($request->all());
-
-        return redirect()->route('status.index')->with('success', __('messages.update'));
+        //
     }
 
     /**
@@ -77,8 +82,6 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        $status = Status::findOrFail($id);
-        $status->delete();
-        return redirect()->route('status.index')->with('success', __('messages.destroy')); 
+        //
     }
 }

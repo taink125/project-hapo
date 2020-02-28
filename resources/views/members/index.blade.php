@@ -21,7 +21,7 @@
         </div>
     </div>
 </form>
-<div class="w-50">
+<div class="">
     <a href="{{ route('member.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</a>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

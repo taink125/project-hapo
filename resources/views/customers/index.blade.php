@@ -15,7 +15,7 @@
         </div>
     </div>
 </form>
-<div class="w-50">
+<div class="">
     <a href="{{ route('customer.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Customer</a>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
