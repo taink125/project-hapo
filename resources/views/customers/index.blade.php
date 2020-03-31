@@ -15,7 +15,7 @@
         </div>
     </div>
 </form>
-<div class="w-50">
+<div class="">
     <a href="{{ route('customer.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Customer</a>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -36,7 +36,7 @@
     @foreach($customers as $customer)
     <tr>
         <td>{{ $customer->name }}</td>
-        <td class="text-center"><img style="width: 100px; height: 128px; object-fit: contain;" src="{{ asset("storage/images/$customer->image") }}" alt="avatar"></td>
+        <td class="text-center"><img style="width: 50px; height: 50px; object-fit: contain;" src="{{ asset("storage/images/$customer->image") }}" alt="avatar"></td>
         <td>{{ $customer->email }}</td>
         <td class="text-center">{{ $customer->phone }}</td>
         <td class="text-center">{{ $customer->address }}</td>

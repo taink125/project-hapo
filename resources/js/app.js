@@ -3,8 +3,12 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+require('../../node_modules/admin-lte/plugins/jquery/jquery.min.js');
+require('../../node_modules/admin-lte/plugins/datepicker/bootstrap-datepicker.js');
+require('../../node_modules/admin-lte/plugins/select2/select2.min.js');
 require('./bootstrap');
+require('../../node_modules/admin-lte/dist/js/adminlte.min.js');
+
 
 window.Vue = require('vue');
 

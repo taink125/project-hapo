@@ -10,6 +10,11 @@ class Task extends Model
     	'name', 'description', 'start_time', 'end_time', 'status_id', 'member_id', 'project_id'
     ];
 
+    public function scopeSearch($query, $request)
+    {
+        return $query->where('name', 'like', '%' . $request->keySearch . '%');
+    }
+
     public function member()
     {
     	return $this->belongsTo(Member::class);

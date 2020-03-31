@@ -21,7 +21,7 @@
         </div>
     </div>
 </form>
-<div class="w-50">
+<div class="">
     <a href="{{ route('member.create') }}" class="btn btn-primary bg-primary mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</a>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -43,7 +43,7 @@
     @foreach($members as $member)
     <tr>
         <td>{{ $member->name }}</td>
-        <td class="text-center"><img style="width: 100px; height: 128px; object-fit: contain;" src="{{ asset("storage/images/$member->image") }}" alt="avatar"></td>
+        <td class="text-center"><img style="width: 50px; height: 50px; object-fit: contain;" src="{{ asset("storage/images/$member->image") }}" alt="avatar"></td>
         <td>{{ $member->email }}</td>
         <td class="text-center">{{ $member->phone }}</td>
         <td class="text-center">{{ $member->address }}</td>

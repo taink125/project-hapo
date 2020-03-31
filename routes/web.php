@@ -37,3 +37,30 @@ Route::prefix('customer')->name('customer.')->group(function() {
 Route::resource('customer', 'CustomerController', [
 	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
 ]);
+
+//Route projects
+Route::prefix('project')->name('project.')->group(function() {
+	Route::get('search', 'ProjectController@index')->name('search');
+});
+
+Route::resource('project', 'ProjectController', [
+	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
+]);
+
+//Route status
+Route::prefix('status')->name('status.')->group(function() {
+	Route::get('search', 'StatusController@index')->name('search');
+});
+
+Route::resource('status', 'StatusController', [
+	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
+]);
+
+//Route tasks
+Route::prefix('tasks')->name('tasks.')->group(function() {
+	Route::get('search', 'TaskController@index')->name('search');
+});
+
+Route::resource('tasks', 'TaskController', [
+	'only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']
+]);

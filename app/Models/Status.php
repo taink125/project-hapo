@@ -10,6 +10,11 @@ class Status extends Model
     	'name', 'type'
     ];
 
+    public function scopeSearch($query, $request)
+    {
+        return $query->where('name', 'like', '%' . $request->keySearch . '%');
+    }
+
     public function projects()
     {
     	return $this->hasMany(Project::class);
