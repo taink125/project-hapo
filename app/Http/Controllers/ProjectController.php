@@ -92,7 +92,6 @@ class ProjectController extends Controller
                 $project->members()->sync($member);
             }
         }
-        
 
         return redirect()->route('project.index')->with('success', __('messages.update'));
     }

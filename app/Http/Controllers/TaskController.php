@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
+use App\Models\Project;
+use App\Models\Member;
 use App\Models\Status;
+use App\Http\Requests\StoreTaskPost;
 
 class TaskController extends Controller
 {
@@ -16,7 +20,7 @@ class TaskController extends Controller
     {
         $tasks = Task::search($request)
             ->paginate(config('app.pagination'));
-        return view('statuses.index', ['tasks' => $tasks]);
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -26,7 +30,12 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'projects' => Project::all(),
+            'members' => Member::all(),
+            'statuses' => Status::all()
+        ];
+        return view('tasks.create');
     }
 
     /**
